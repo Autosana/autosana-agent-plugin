@@ -13,6 +13,7 @@
       "description": "Author, validate, and export Autosana code-managed tests (.autosana/ flows, suites, hooks).",
       "homepage": "https://docs.autosana.ai/code-managed-flows",
       "repository": "https://github.com/Autosana/claude-code-plugin",
+      "license": "MIT",
       "keywords": ["autosana", "testing", "e2e", "code-managed-flows", "gitops"],
       "category": "workflow"
     }

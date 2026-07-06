@@ -7,5 +7,6 @@
     "email": "founders@autosana.ai"
   },
   "homepage": "https://docs.autosana.ai/code-managed-flows",
-  "repository": "https://github.com/Autosana/claude-code-plugin"
+  "repository": "https://github.com/Autosana/claude-code-plugin",
+  "license": "MIT"
 }
