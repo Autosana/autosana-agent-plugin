@@ -1,0 +1,20 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "autosana",
+  "description": "Autosana's Claude Code plugins.",
+  "owner": {
+    "name": "Autosana",
+    "email": "founders@autosana.ai"
+  },
+  "plugins": [
+    {
+      "name": "autosana",
+      "source": "./",
+      "description": "Author, validate, and export Autosana code-managed tests (.autosana/ flows, suites, hooks).",
+      "homepage": "https://docs.autosana.ai/code-managed-flows",
+      "repository": "https://github.com/Autosana/claude-code-plugin",
+      "keywords": ["autosana", "testing", "e2e", "code-managed-flows", "gitops"],
+      "category": "workflow"
+    }
+  ]
+}

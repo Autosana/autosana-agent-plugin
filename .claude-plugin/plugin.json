@@ -1,0 +1,11 @@
+{
+  "name": "autosana",
+  "description": "Author, validate, and export Autosana code-managed tests — the .autosana/ flows, suites, and hook files synced to Autosana via its GitHub App.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Autosana",
+    "email": "founders@autosana.ai"
+  },
+  "homepage": "https://docs.autosana.ai/code-managed-flows",
+  "repository": "https://github.com/Autosana/claude-code-plugin"
+}
