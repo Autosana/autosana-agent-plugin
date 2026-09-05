@@ -160,7 +160,8 @@ environment: staging   # optional
   takes `app_id`), `default_platform`, `environment`. Anything else is an error, and
   `autosana flows validate` reports it.
 - **Precedence.** A flag beats `AUTOSANA_BUNDLE_ID`, which beats the file. `--platform <p>` picks
-  that entry; with no `--platform`, `default_platform` does.
+  that entry; with no `--platform`, `default_platform` does (or the sole entry when there is one).
+  A `--local` run picks the entry for the live session's platform.
 - **Not a test.** It is never uploaded by `--cloud` and never read by the sync — it only sets
   defaults for commands you run yourself.
 
