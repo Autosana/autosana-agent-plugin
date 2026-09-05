@@ -24,9 +24,8 @@ autosana flows validate                              # checks ./.autosana in the
 autosana flows validate services/mobile/.autosana    # or a specific path (monorepo)
 ```
 
-Exit code is non-zero on any error, with the offending file + line. The CLI needs **autosana
-0.8.0+** (`pip install "autosana>=0.8.0"`, or `uvx autosana flows validate`). It validates the
-flow/suite **YAML** exactly as the sync does; a few checks run **only** server-side (see
+Exit code is non-zero on any error, with the offending file + line. It validates the
+flow/suite **YAML** (and `config.yaml`) exactly as the sync does; a few checks run **only** server-side (see
 "What the CLI can't check"), so a green local run isn't a full guarantee — but it catches the
 mechanical errors behind most sync failures.
 
@@ -34,9 +33,11 @@ mechanical errors behind most sync failures.
 
 1. Author/edit files under `.autosana/` (schema below).
 2. `autosana flows validate` — fix every error before committing.
-3. Commit and open a PR (Autosana previews changed flows + posts an **Autosana Flows** check), or
-   push to the default branch to sync for real.
-4. Read the **Autosana Flows** check; it annotates parse errors inline with "Did you mean" hints.
+3. Optionally run the uncommitted tests: `autosana run <flow> --local` against a device from
+   `autosana up`, or `autosana run --suite <key> --cloud` on Autosana's cloud devices.
+4. Commit and open a PR (Autosana previews changed flows + posts an **Autosana - Code-Managed
+   Flows** check), or push to the default branch to sync for real.
+5. Read the check; it annotates parse errors inline with "Did you mean" hints.
 
 ## Repository layout
 
@@ -45,6 +46,7 @@ repo's **Root directory** setting for monorepos). Keys stay relative to `.autosa
 
 ```text
 .autosana/
+├── config.yaml              # run defaults for the CLI — not a test, never synced
 ├── login.flow.yaml          # a root flow (key "login")
 ├── hooks/
 │   └── seed-db.py           # a hook — slug "seed-db"
@@ -137,6 +139,32 @@ one list are rejected; the same slug in both setup and teardown is fine.
 - Script hooks read env vars **natively** (`os.environ`, `process.env`, `$VAR`).
 - Launch-args (`.json`) and cURL hooks use the `${env:KEY}` token instead.
 
+## Run defaults — `config.yaml`
+
+Which app a run targets normally comes from `--bundle-id`/`--platform` (mobile) or `--app-id` (web)
+on every `autosana run`. Commit `.autosana/config.yaml` and those become defaults:
+
+```yaml
+apps:
+  ios:
+    bundle_id: com.example.app.dev
+  android:
+    bundle_id: com.example.app
+  web:
+    app_id: my-web-app
+default_platform: ios
+environment: staging   # optional
+```
+
+- **Only these keys.** `apps` (keyed `ios` / `android` / `web`; mobile entries take `bundle_id`, web
+  takes `app_id`), `default_platform`, `environment`. Anything else is an error, and
+  `autosana flows validate` reports it.
+- **Precedence.** A flag beats `AUTOSANA_BUNDLE_ID`, which beats the file. `--platform <p>` picks
+  that entry; with no `--platform`, `default_platform` does (or the sole entry when there is one).
+  A `--local` run picks the entry for the live session's platform.
+- **Not a test.** It is never uploaded by `--cloud` and never read by the sync — it only sets
+  defaults for commands you run yourself.
+
 ## Referencing variables
 
 Inside `instructions`, reference dashboard variables with `${env:VAR_NAME}` — **reference only**.
@@ -163,7 +191,7 @@ display name mid-run, use `${hooks:Hook Name}` in the instructions text.
 
 `app:` name resolution, hook-slug references + conflicts, and hook-file contents (empty scripts,
 invalid launch-args JSON) need your org's data, so they run only on the server and surface on the
-**Autosana Flows** check after you push — not in `autosana flows validate`.
+**Autosana - Code-Managed Flows** check after you push — not in `autosana flows validate`.
 
 ## Migrating existing dashboard flows
 
