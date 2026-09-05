@@ -45,6 +45,7 @@ repo's **Root directory** setting for monorepos). Keys stay relative to `.autosa
 
 ```text
 .autosana/
+├── config.yaml              # run defaults for the CLI — not a test, never synced
 ├── login.flow.yaml          # a root flow (key "login")
 ├── hooks/
 │   └── seed-db.py           # a hook — slug "seed-db"
@@ -136,6 +137,31 @@ one list are rejected; the same slug in both setup and teardown is fine.
 
 - Script hooks read env vars **natively** (`os.environ`, `process.env`, `$VAR`).
 - Launch-args (`.json`) and cURL hooks use the `${env:KEY}` token instead.
+
+## Run defaults — `config.yaml`
+
+Which app a run targets normally comes from `--bundle-id`/`--platform` (mobile) or `--app-id` (web)
+on every `autosana run`. Commit `.autosana/config.yaml` and those become defaults:
+
+```yaml
+apps:
+  ios:
+    bundle_id: com.example.app.dev
+  android:
+    bundle_id: com.example.app
+  web:
+    app_id: my-web-app
+default_platform: ios
+environment: staging   # optional
+```
+
+- **Only these keys.** `apps` (keyed `ios` / `android` / `web`; mobile entries take `bundle_id`, web
+  takes `app_id`), `default_platform`, `environment`. Anything else is an error, and
+  `autosana flows validate` reports it.
+- **Precedence.** A flag beats `AUTOSANA_BUNDLE_ID`, which beats the file. `--platform <p>` picks
+  that entry; with no `--platform`, `default_platform` does.
+- **Not a test.** It is never uploaded by `--cloud` and never read by the sync — it only sets
+  defaults for commands you run yourself.
 
 ## Referencing variables
 
