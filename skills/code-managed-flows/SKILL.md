@@ -24,9 +24,8 @@ autosana flows validate                              # checks ./.autosana in the
 autosana flows validate services/mobile/.autosana    # or a specific path (monorepo)
 ```
 
-Exit code is non-zero on any error, with the offending file + line. The CLI needs **autosana
-0.8.0+** (`pip install "autosana>=0.8.0"`, or `uvx autosana flows validate`). It validates the
-flow/suite **YAML** exactly as the sync does; a few checks run **only** server-side (see
+Exit code is non-zero on any error, with the offending file + line. It validates the
+flow/suite **YAML** (and `config.yaml`) exactly as the sync does; a few checks run **only** server-side (see
 "What the CLI can't check"), so a green local run isn't a full guarantee — but it catches the
 mechanical errors behind most sync failures.
 
@@ -34,9 +33,11 @@ mechanical errors behind most sync failures.
 
 1. Author/edit files under `.autosana/` (schema below).
 2. `autosana flows validate` — fix every error before committing.
-3. Commit and open a PR (Autosana previews changed flows + posts an **Autosana Flows** check), or
-   push to the default branch to sync for real.
-4. Read the **Autosana Flows** check; it annotates parse errors inline with "Did you mean" hints.
+3. Optionally run the uncommitted tests: `autosana run <flow> --local` against a device from
+   `autosana up`, or `autosana run --suite <key> --cloud` on Autosana's cloud devices.
+4. Commit and open a PR (Autosana previews changed flows + posts an **Autosana - Code-Managed
+   Flows** check), or push to the default branch to sync for real.
+5. Read the check; it annotates parse errors inline with "Did you mean" hints.
 
 ## Repository layout
 
@@ -189,7 +190,7 @@ display name mid-run, use `${hooks:Hook Name}` in the instructions text.
 
 `app:` name resolution, hook-slug references + conflicts, and hook-file contents (empty scripts,
 invalid launch-args JSON) need your org's data, so they run only on the server and surface on the
-**Autosana Flows** check after you push — not in `autosana flows validate`.
+**Autosana - Code-Managed Flows** check after you push — not in `autosana flows validate`.
 
 ## Migrating existing dashboard flows
 
