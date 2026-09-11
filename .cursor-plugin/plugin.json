@@ -1,0 +1,14 @@
+{
+  "name": "autosana",
+  "version": "0.2.0",
+  "description": "Create and run end-to-end tests for web, iOS, and Android apps, investigate failed runs, and manage test suites through Autosana.",
+  "author": {
+    "name": "Autosana",
+    "email": "founders@autosana.ai"
+  },
+  "homepage": "https://docs.autosana.ai/mcp-setup",
+  "repository": "https://github.com/Autosana/autosana-agent-plugin",
+  "license": "MIT",
+  "logo": "assets/logo.png",
+  "mcpServers": "./mcp.json"
+}

@@ -1,12 +1,13 @@
 {
   "name": "autosana",
-  "description": "Author, validate, and export Autosana code-managed tests — the .autosana/ flows, suites, and hook files synced to Autosana via its GitHub App.",
-  "version": "0.1.0",
+  "description": "Create and run Autosana tests, investigate failures, and author code-managed flows.",
+  "version": "0.2.0",
   "author": {
     "name": "Autosana",
     "email": "founders@autosana.ai"
   },
   "homepage": "https://docs.autosana.ai/code-managed-flows",
-  "repository": "https://github.com/Autosana/claude-code-plugin",
-  "license": "MIT"
+  "repository": "https://github.com/Autosana/autosana-agent-plugin",
+  "license": "MIT",
+  "mcpServers": "./.mcp.json"
 }
