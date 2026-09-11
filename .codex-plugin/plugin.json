@@ -1,0 +1,19 @@
+{
+  "name": "autosana",
+  "version": "0.2.0",
+  "description": "Create and run end-to-end tests for web, iOS, and Android apps, investigate failed runs, and manage test suites through Autosana.",
+  "author": {
+    "name": "Autosana",
+    "email": "founders@autosana.ai"
+  },
+  "interface": {
+    "displayName": "Autosana",
+    "shortDescription": "Test web and mobile apps with Autosana.",
+    "longDescription": "Create and run end-to-end tests for web, iOS, and Android apps, investigate failed runs, and manage test suites through Autosana.",
+    "developerName": "Autosana",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": "Show my recent Autosana test runs and summarize failures."
+  },
+  "mcpServers": "./.mcp.json"
+}
