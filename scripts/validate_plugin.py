@@ -60,6 +60,16 @@ def validate():
             require(
                 manifest["repository"] == REPOSITORY, f"Wrong repository in {filename}"
             )
+        if client == "codex":
+            require(
+                local_path(manifest["skills"]).is_dir(),
+                "Missing Codex skills directory",
+            )
+            for asset in ("logo", "composerIcon"):
+                require(
+                    local_path(manifest["interface"][asset]).is_file(),
+                    f"Missing Codex {asset}",
+                )
     require(len(versions) == 1, "Plugin versions must match across clients")
 
     marketplace = read_json(".claude-plugin/marketplace.json")

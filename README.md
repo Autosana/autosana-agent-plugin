@@ -5,7 +5,7 @@ A plugin for Claude Code, Cursor, and Codex that connects your assistant to
 validate, and export code-managed tests: the `.autosana/` YAML flows, suites, and hook
 files that Autosana syncs from your repo via its GitHub App.
 
-The skill teaches Claude the exact file schema, the *validate-before-push* workflow, and the gotchas
+The skill teaches your assistant the exact file schema, the *validate-before-push* workflow, and the gotchas
 that fail a sync, so you can build a valid `.autosana/` tree in one pass. It auto-activates when you
 work on files under `.autosana/`, or you can invoke it directly.
 
@@ -45,6 +45,17 @@ Browser sign-in is available on the production MCP endpoint. Official marketplac
 ## Cursor
 
 The repository includes `.cursor-plugin/plugin.json` and `mcp.json` for Cursor, sharing the existing skills and the same hosted MCP service. The package is prepared for marketplace submission; it is not yet an approved listing. Authenticate in the browser when connecting.
+
+## Codex
+
+Install from the repository using the Codex CLI:
+
+```sh
+codex plugin marketplace add Autosana/autosana-agent-plugin
+codex plugin add autosana@autosana
+```
+
+Start a new session and complete browser sign-in when prompted. The plugin includes the MCP connection and the shared code-managed flow skill.
 
 ## Claude Desktop
 
