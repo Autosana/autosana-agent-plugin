@@ -1,8 +1,9 @@
 # Autosana agent plugin
 
-A [Claude Code](https://claude.com/claude-code) plugin that helps you author, validate, and export
-**[Autosana](https://autosana.ai) code-managed tests** — the `.autosana/` YAML flows, suites, and
-hook files that Autosana syncs from your repo via its GitHub App.
+A plugin for Claude Code, Cursor, and Codex that connects your assistant to
+[Autosana](https://autosana.ai) for web, iOS, and Android testing. It also helps you author,
+validate, and export code-managed tests: the `.autosana/` YAML flows, suites, and hook
+files that Autosana syncs from your repo via its GitHub App.
 
 The skill teaches Claude the exact file schema, the *validate-before-push* workflow, and the gotchas
 that fail a sync, so you can build a valid `.autosana/` tree in one pass. It auto-activates when you
@@ -39,7 +40,7 @@ The skill pairs with the `autosana` CLI (`pip install "autosana>=0.8.0"`), which
 
 This package also connects to `https://mcp.autosana.ai/mcp`. Complete browser sign-in when your client asks to authenticate. No API key is included or required by the package.
 
-**Release status:** OAuth production rollout and marketplace review are still pending. Do not advertise this release as production-ready until production discovery, login, refresh, revocation, and tool calls pass. Preview testing does not establish production readiness.
+Browser sign-in is available on the production MCP endpoint. Official marketplace listings remain subject to each marketplace's review.
 
 ## Cursor
 
@@ -47,7 +48,7 @@ The repository includes `.cursor-plugin/plugin.json` and `mcp.json` for Cursor, 
 
 ## Claude Desktop
 
-Claude Desktop uses a remote connector, separately from this Claude Code plugin. In Settings, open Connectors, add a custom connector with URL `https://mcp.autosana.ai/mcp`, and complete browser sign-in. Custom connector availability depends on your Claude account. Wait for the production OAuth rollout before using this URL for OAuth.
+Claude Desktop uses a remote connector, separately from this Claude Code plugin. In Settings, open Connectors, add a custom connector with URL `https://mcp.autosana.ai/mcp`, and complete browser sign-in. Custom connector availability depends on your Claude account.
 
 Official Claude connector directory submission and approval are separate from publishing this repository.
 
