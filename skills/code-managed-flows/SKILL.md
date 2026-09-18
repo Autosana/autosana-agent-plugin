@@ -1,6 +1,6 @@
 ---
 name: code-managed-flows
-description: Use when writing Autosana flow instructions through MCP or authoring, validating, or exporting code-managed flows, suites, and hooks in `.autosana/`.
+description: Use when creating, editing, validating, or exporting Autosana code-managed tests — the `.autosana/` YAML flows, suites, and hook script files that Autosana syncs from a repo via its GitHub App. Covers the exact file schema, the validate-before-push workflow, and the gotchas that fail the sync.
 ---
 
 # Autosana Code-Managed Flows
@@ -11,8 +11,8 @@ them as dashboard flows/suites (GitOps for tests — the repo is the source of t
 through PRs). Code-managed definitions are **read-only in the dashboard**; you edit them by
 changing the files and pushing.
 
-Use the writing guidance below whenever you create or edit Autosana flow instructions, including
-through MCP. The file schemas and CLI validation workflow apply to code-managed files under `.autosana/`.
+Use this skill whenever you're authoring or changing files under `.autosana/`, or the user asks
+to create / validate / export Autosana code-managed flows.
 
 ## Writing effective flow instructions
 
@@ -81,9 +81,9 @@ caching: false
 setup_hooks: [seed-db]
 teardown_hooks: [reset-test-env]
 instructions:
-  - Add an available item to your cart
-  - Complete checkout using the test payment details from the setup hook
-  - Verify the order confirmation lists the purchased item and the correct total
+  - From the home screen, tap the cart icon
+  - Tap "Checkout"
+  - Verify the order confirmation screen appears
 ```
 
 | Key | Required | Notes |
