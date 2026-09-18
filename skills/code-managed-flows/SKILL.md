@@ -1,6 +1,6 @@
 ---
 name: code-managed-flows
-description: Use when creating or editing Autosana flow instructions, including through MCP, or when authoring, validating, or exporting code-managed tests in `.autosana/`. Covers effective flow instructions and the YAML schemas and validation workflow for code-managed flows, suites, and hooks.
+description: Use when writing Autosana flow instructions through MCP or authoring, validating, or exporting code-managed flows, suites, and hooks in `.autosana/`.
 ---
 
 # Autosana Code-Managed Flows
@@ -16,48 +16,11 @@ through MCP. The file schemas and CLI validation workflow apply to code-managed 
 
 ## Writing effective flow instructions
 
-Apply this guidance before creating or updating flows. It summarizes the
-[canonical instruction style guide](https://docs.autosana.ai/writing-effective-flow-instructions)
-so you can use it without fetching documentation or reading MCP resources.
+Describe user goals, keep intermediate actions flexible, and end with a precise outcome check.
+Use paragraphs or bullets, not numbered steps. Quote UI text only when testing it or
+disambiguating elements. Web tests auto-load the site; include URLs only when testing URL behavior.
 
-- **Default to journey-style.** Describe what the user is trying to do. Keep intermediate actions
-  goal-oriented and make the behavior under test and expected outcome precise.
-- **End with verification.** Assert the user-visible outcome that matters. Avoid vague checks
-  such as "check if it works."
-- **Use paragraphs, plain lines, or bullets.** Avoid numbered lists in flow instructions.
-- **Avoid incidental UI details.** Do not pin routine navigation to button colors, positions,
-  icons, or exact labels. Quoted UI labels are exact ground truth; only quote them when testing
-  the text itself or disambiguating similar elements.
-- **Be specific when the UI is the test.** Spell out form validation, error messages, disabled
-  states, or exact copy when those are the behavior being tested.
-- **Reference variables.** Use `${env:VAR_NAME}` for sensitive or environment-specific values,
-  including credentials, tokens, URLs, test IDs, and feature flags. Keep values in dashboard
-  variables and mark sensitive values as secrets, rather than committing them in flow files.
-- **Web tests auto-load the site.** Do not include URLs unless URL behavior is explicitly under test.
-
-Bad: brittle navigation and no meaningful assertion:
-
-```text
-Tap the blue gear icon in the top right.
-Tap "Profile", then "Change Email".
-Type the new address and tap "Save".
-Check if it works.
-```
-
-Good: clear intent and a specific outcome:
-
-```text
-Log in with email ${env:TEST_EMAIL} and password ${env:TEST_PASSWORD}.
-Update your account email to ${env:NEW_EMAIL}.
-Reopen your account settings and verify the saved email is ${env:NEW_EMAIL}.
-```
-
-When exact UI behavior is the subject of the test:
-
-```text
-Try to save an invalid email address in account settings.
-Verify the error message "Enter a valid email address" appears and the email remains unchanged.
-```
+See [the full guide](https://docs.autosana.ai/writing-effective-flow-instructions).
 
 ## The golden rule: validate before you push
 
@@ -76,7 +39,7 @@ mechanical errors behind most sync failures.
 
 ## Workflow
 
-1. Author/edit files under `.autosana/` using the writing guidance above and schemas below.
+1. Author/edit files under `.autosana/` (schema below).
 2. `autosana flows validate` — fix every error before committing.
 3. Optionally run the uncommitted tests: `autosana run <flow> --local` against a device from
    `autosana up`, or `autosana run --suite <key> --cloud` on Autosana's cloud devices.

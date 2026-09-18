@@ -5,8 +5,7 @@ A plugin for Claude Code, Cursor, and Codex that connects your assistant to
 validate, and export code-managed tests: the `.autosana/` YAML flows, suites, and hook
 files that Autosana syncs from your repo via its GitHub App.
 
-The skill includes guidance and examples for writing effective flow instructions, including through
-MCP. For code-managed tests, it also covers the file schema, the *validate-before-push* workflow,
+The skill covers effective flow instructions, including through MCP. For code-managed tests, it also covers the file schema, the *validate-before-push* workflow,
 and the gotchas that fail a sync. It auto-activates when you author Autosana flow instructions or
 work on files under `.autosana/`, or you can invoke it directly.
 
