@@ -1,6 +1,6 @@
 ---
 name: code-managed-flows
-description: Use when creating, editing, validating, or exporting Autosana code-managed tests — the `.autosana/` YAML flows, suites, and hook script files that Autosana syncs from a repo via its GitHub App. Covers the exact file schema, the validate-before-push workflow, and the gotchas that fail the sync.
+description: Use when creating or editing Autosana flow instructions, including through MCP, or when authoring, validating, or exporting code-managed tests in `.autosana/`. Covers effective flow instructions and the YAML schemas and validation workflow for code-managed flows, suites, and hooks.
 ---
 
 # Autosana Code-Managed Flows
@@ -11,8 +11,53 @@ them as dashboard flows/suites (GitOps for tests — the repo is the source of t
 through PRs). Code-managed definitions are **read-only in the dashboard**; you edit them by
 changing the files and pushing.
 
-Use this skill whenever you're authoring or changing files under `.autosana/`, or the user asks
-to create / validate / export Autosana code-managed flows.
+Use the writing guidance below whenever you create or edit Autosana flow instructions, including
+through MCP. The file schemas and CLI validation workflow apply to code-managed files under `.autosana/`.
+
+## Writing effective flow instructions
+
+Apply this guidance before creating or updating flows. It summarizes the
+[canonical instruction style guide](https://docs.autosana.ai/writing-effective-flow-instructions)
+so you can use it without fetching documentation or reading MCP resources.
+
+- **Default to journey-style.** Describe what the user is trying to do. Keep intermediate actions
+  goal-oriented and make the behavior under test and expected outcome precise.
+- **End with verification.** Assert the user-visible outcome that matters. Avoid vague checks
+  such as "check if it works."
+- **Use paragraphs, plain lines, or bullets.** Avoid numbered lists in flow instructions.
+- **Avoid incidental UI details.** Do not pin routine navigation to button colors, positions,
+  icons, or exact labels. Quoted UI labels are exact ground truth; only quote them when testing
+  the text itself or disambiguating similar elements.
+- **Be specific when the UI is the test.** Spell out form validation, error messages, disabled
+  states, or exact copy when those are the behavior being tested.
+- **Reference variables.** Use `${env:VAR_NAME}` for sensitive or environment-specific values,
+  including credentials, tokens, URLs, test IDs, and feature flags. Keep values in dashboard
+  variables and mark sensitive values as secrets, rather than committing them in flow files.
+- **Web tests auto-load the site.** Do not include URLs unless URL behavior is explicitly under test.
+
+Bad: brittle navigation and no meaningful assertion:
+
+```text
+Tap the blue gear icon in the top right.
+Tap "Profile", then "Change Email".
+Type the new address and tap "Save".
+Check if it works.
+```
+
+Good: clear intent and a specific outcome:
+
+```text
+Log in with email ${env:TEST_EMAIL} and password ${env:TEST_PASSWORD}.
+Update your account email to ${env:NEW_EMAIL}.
+Reopen your account settings and verify the saved email is ${env:NEW_EMAIL}.
+```
+
+When exact UI behavior is the subject of the test:
+
+```text
+Try to save an invalid email address in account settings.
+Verify the error message "Enter a valid email address" appears and the email remains unchanged.
+```
 
 ## The golden rule: validate before you push
 
@@ -31,7 +76,7 @@ mechanical errors behind most sync failures.
 
 ## Workflow
 
-1. Author/edit files under `.autosana/` (schema below).
+1. Author/edit files under `.autosana/` using the writing guidance above and schemas below.
 2. `autosana flows validate` — fix every error before committing.
 3. Optionally run the uncommitted tests: `autosana run <flow> --local` against a device from
    `autosana up`, or `autosana run --suite <key> --cloud` on Autosana's cloud devices.
@@ -73,9 +118,9 @@ caching: false
 setup_hooks: [seed-db]
 teardown_hooks: [reset-test-env]
 instructions:
-  - From the home screen, tap the cart icon
-  - Tap "Checkout"
-  - Verify the order confirmation screen appears
+  - Add an available item to your cart
+  - Complete checkout using the test payment details from the setup hook
+  - Verify the order confirmation lists the purchased item and the correct total
 ```
 
 | Key | Required | Notes |
