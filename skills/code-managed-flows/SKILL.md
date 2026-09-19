@@ -14,6 +14,14 @@ changing the files and pushing.
 Use this skill whenever you're authoring or changing files under `.autosana/`, or the user asks
 to create / validate / export Autosana code-managed flows.
 
+## Writing effective flow instructions
+
+Describe user goals, keep intermediate actions flexible, and end with a precise outcome check.
+Use paragraphs or bullets, not numbered steps. Quote UI text only when testing it or
+disambiguating elements. Web tests auto-load the site; include URLs only when testing URL behavior.
+
+See [the full guide](https://docs.autosana.ai/writing-effective-flow-instructions).
+
 ## The golden rule: validate before you push
 
 The sync applies **all-or-nothing** — one invalid file freezes materialization for the *whole*
