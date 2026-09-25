@@ -54,6 +54,7 @@ repo's **Root directory** setting for monorepos). Keys stay relative to `.autosa
 
 ```text
 .autosana/
+├── autosana.md              # context included in every flow run
 ├── config.yaml              # run defaults for the CLI — not a test, never synced
 ├── login.flow.yaml          # a root flow (key "login")
 ├── hooks/
@@ -65,8 +66,14 @@ repo's **Root directory** setting for monorepos). Keys stay relative to `.autosa
         └── reset-test-env.sh  # a hook — slug "reset-test-env"
 ```
 
-A file is recognized only if it ends in `.flow.yaml`, is named exactly `_suite.yaml`, or sits
+A file is recognized only if it's `autosana.md` at the root, ends in `.flow.yaml`, is named exactly `_suite.yaml`, or sits
 **directly** inside a `hooks/` folder with a supported extension. Everything else is ignored.
+
+## Repository context — `autosana.md`
+
+Autosana includes `.autosana/autosana.md` in every flow run for the repo. Keep it short: a sentence
+or two on what the app is and who uses it, plus anything every flow needs. Plain Markdown, at most
+64 KiB. `autosana flows export` creates a starter file if one doesn't exist.
 
 ## Flow files — `*.flow.yaml`
 
