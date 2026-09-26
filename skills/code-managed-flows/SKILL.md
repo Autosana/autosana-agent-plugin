@@ -71,9 +71,14 @@ A file is recognized only if it's `autosana.md` at the root, ends in `.flow.yaml
 
 ## Repository context — `autosana.md`
 
-Autosana includes `.autosana/autosana.md` in every flow run for the repo. Keep it short: a sentence
-or two on what the app is and who uses it, plus anything every flow needs. Plain Markdown, at most
-64 KiB. `autosana flows export` creates a starter file if one doesn't exist.
+Autosana includes `.autosana/autosana.md` in every flow run for the repo. Use it for context and
+rules every flow needs: what the app is, app-specific terms, things to watch out for.
+
+**Keep it super concise.** A few short lines, not a manual. Everything in it goes into every flow
+run, so only add what most flows need; put flow-specific details in that flow's instructions.
+
+Plain Markdown, at most 64 KiB. HTML comments (`<!-- -->`) are not sent to flows.
+`autosana flows export` creates a starter file if one doesn't exist.
 
 ## Flow files — `*.flow.yaml`
 
