@@ -1,7 +1,7 @@
 {
   "name": "autosana",
   "description": "Create and run Autosana tests, investigate failures, and author code-managed flows.",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "author": {
     "name": "Autosana",
     "email": "founders@autosana.ai"

@@ -1,6 +1,6 @@
 {
   "name": "autosana",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Create and run end-to-end tests for web, iOS, and Android apps, investigate failed runs, and manage test suites through Autosana.",
   "author": {
     "name": "Autosana",
