@@ -1,7 +1,8 @@
 {
   "name": "autosana",
-  "version": "0.2.5",
-  "description": "Create and run end-to-end tests for web, iOS, and Android apps, investigate failed runs, and manage test suites through Autosana.",
+  "displayName": "Autosana",
+  "version": "0.2.6",
+  "description": "Write, run, and debug end-to-end tests for iOS, Android, and web apps in plain English, and author code-managed flows.",
   "author": {
     "name": "Autosana",
     "email": "founders@autosana.ai"
@@ -10,5 +11,26 @@
   "repository": "https://github.com/Autosana/autosana-agent-plugin",
   "license": "MIT",
   "logo": "assets/logo.png",
+  "keywords": [
+    "autosana",
+    "testing",
+    "e2e",
+    "qa",
+    "mobile",
+    "ios",
+    "android",
+    "web",
+    "mcp",
+    "code-managed-flows"
+  ],
+  "category": "developer-tools",
+  "tags": [
+    "testing",
+    "e2e",
+    "qa",
+    "mobile",
+    "mcp"
+  ],
+  "skills": "./skills/",
   "mcpServers": "./mcp.json"
 }

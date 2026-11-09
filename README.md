@@ -44,7 +44,11 @@ Browser sign-in is available on the production MCP endpoint. Official marketplac
 
 ## Cursor
 
-The repository includes `.cursor-plugin/plugin.json` and `mcp.json` for Cursor, sharing the existing skills and the same hosted MCP service. The package is prepared for marketplace submission; it is not yet an approved listing. Authenticate in the browser when connecting.
+Once the plugin is listed in the Cursor Marketplace, open **Cursor Settings → Plugins**, search for **Autosana**, and click **Install**. You can also run `/add-plugin autosana` in chat. Complete the browser sign-in when Cursor connects. There's no API key to configure.
+
+To try the plugin before it's listed, clone this repository to `~/.cursor/plugins/local/autosana` and reload Cursor.
+
+The Cursor plugin uses `.cursor-plugin/plugin.json` and `mcp.json`, and shares the skills and the hosted MCP service with the other clients.
 
 ## Codex
 
