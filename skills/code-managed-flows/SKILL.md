@@ -14,6 +14,12 @@ changing the files and pushing.
 Use this skill whenever you're authoring or changing files under `.autosana/`, or the user asks
 to create / validate / export Autosana code-managed flows.
 
+## Check the live docs first
+
+This skill is a snapshot. The Autosana docs are the source of truth and can be newer. When the
+Autosana MCP server is connected, call `search_autosana` (for example "code-managed flows schema")
+before writing files, and follow the docs wherever they differ from this skill.
+
 ## Writing effective flow instructions
 
 Describe user goals, keep intermediate actions flexible, and end with a precise outcome check.
